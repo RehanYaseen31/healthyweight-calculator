@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ideal Weight Calculator – Find Your Healthy Weight Range</title>
+  <meta name="description" content="Free ideal weight calculator: enter your height, weight and age to see your estimated healthy weight range, BMI and weight category. Works in kg/cm or lb/ft-in. No sign-up, results are instant.">
+  <meta name="theme-color" content="#0f766e">
+  <!-- No canonical / social URL: production address is not known yet. -->
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a healthy weight range?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A healthy weight range is the span of body weights linked to the lowest health risk for your height. This calculator estimates it with the adult BMI range of 18.5 to 24.9: lower bound = 18.5 × height², upper bound = 24.9 × height² (height in metres, result in kilograms)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How should I measure my height for the calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Stand straight against a wall without shoes, heels together, and mark the top of your head. Measure in centimetres, or in feet and inches. Measure in the morning if possible, since height can vary slightly through the day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I enter my weight in kilograms or pounds?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Either. Use the unit toggle above the form to switch between metric (kg, cm) and imperial (lb, ft/in). The calculator converts everything internally, and results are shown in both units so you can read whichever you prefer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the calculator ask for my age?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adult BMI categories do not apply to children and teenagers, whose healthy ranges depend on age- and sex-specific growth charts. If you are under 18, the calculator shows an age-appropriate notice and skips the adult weight categories."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are ideal weight formulas accurate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They are estimates, not medical targets. BMI-based ranges do not account for muscle mass, bone density, body composition, pregnancy, or medical conditions. Use the result as a starting point and discuss personal targets with a qualified health professional."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do if my weight is outside the healthy range?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Treat it as information, not a verdict. Small, sustainable changes to activity, sleep and nutrition matter more than chasing a single number. If you have concerns, speak with a doctor or registered dietitian rather than acting on a calculator alone."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#calculator">Skip to the calculator</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <p class="brand"><span class="brand-mark" aria-hidden="true">◉</span> HealthyWeight</p>
+      <nav aria-label="Page sections">
+        <ul class="nav-list">
+          <li><a href="#calculator">Calculator</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#faq">FAQs</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="page-title">
+      <div class="wrap">
+        <h1 id="page-title">Find Your Healthy Weight Range</h1>
+        <p class="lede">Enter your height, current weight and age. We estimate the weight range linked to a
+          healthy adult BMI, show where you sit on the scale, and explain every number — instantly, in your browser.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <!-- Calculator -->
+      <section class="card calculator" id="calculator" aria-labelledby="calc-heading">
+        <h2 id="calc-heading">Ideal weight calculator</h2>
+
+        <form id="calc-form" novalidate>
+          <!-- Unit toggle -->
+          <fieldset class="unit-toggle">
+            <legend class="visually-hidden">Choose units</legend>
+            <div class="toggle" role="radiogroup" aria-label="Measurement units">
+              <label class="toggle-option">
+                <input type="radio" name="units" value="metric" checked>
+                <span>Metric <small>kg · cm</small></span>
+              </label>
+              <label class="toggle-option">
+                <input type="radio" name="units" value="imperial">
+                <span>Imperial <small>lb · ft/in</small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Height -->
+          <fieldset class="field-group" id="height-metric-group">
+            <legend>Your height <span class="req" aria-hidden="true">*</span></legend>
+            <div class="field">
+              <label for="height-cm">Height in centimetres</label>
+              <div class="input-wrap">
+                <input type="number" id="height-cm" name="heightCm" inputmode="decimal"
+                       min="50" max="300" step="0.1" placeholder="e.g. 170"
+                       aria-describedby="height-cm-error" autocomplete="off">
+                <span class="unit-suffix" aria-hidden="true">cm</span>
+              </div>
+              <p class="error" id="height-cm-error" role="alert" hidden></p>
+            </div>
+          </fieldset>
+
+          <fieldset class="field-group" id="height-imperial-group" hidden>
+            <legend>Your height <span class="req" aria-hidden="true">*</span></legend>
+            <div class="field-row">
+              <div class="field">
+                <label for="height-ft">Feet</label>
+                <div class="input-wrap">
+                  <input type="number" id="height-ft" name="heightFt" inputmode="numeric"
+                         min="1" max="9" step="1" placeholder="e.g. 5"
+                         aria-describedby="height-ft-error" autocomplete="off">
+                  <span class="unit-suffix" aria-hidden="true">ft</span>
+                </div>
+                <p class="error" id="height-ft-error" role="alert" hidden></p>
+              </div>
+              <div class="field">
+                <label for="height-in">Inches</label>
+                <div class="input-wrap">
+                  <input type="number" id="height-in" name="heightIn" inputmode="decimal"
+                         min="0" max="11.9" step="0.1" placeholder="e.g. 7"
+                         aria-describedby="height-in-error" autocomplete="off">
+                  <span class="unit-suffix" aria-hidden="true">in</span>
+                </div>
+                <p class="error" id="height-in-error" role="alert" hidden></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Weight (optional) -->
+          <fieldset class="field-group">
+            <legend>Your current weight <span class="optional">(optional)</span></legend>
+            <div class="field" id="weight-metric-field">
+              <label for="weight-kg">Weight in kilograms</label>
+              <div class="input-wrap">
+                <input type="number" id="weight-kg" name="weightKg" inputmode="decimal"
+                       min="2" max="635" step="0.1" placeholder="e.g. 68"
+                       aria-describedby="weight-kg-error weight-hint" autocomplete="off">
+                <span class="unit-suffix" aria-hidden="true">kg</span>
+              </div>
+              <p class="error" id="weight-kg-error" role="alert" hidden></p>
+            </div>
+            <div class="field" id="weight-imperial-field" hidden>
+              <label for="weight-lb">Weight in pounds</label>
+              <div class="input-wrap">
+                <input type="number" id="weight-lb" name="weightLb" inputmode="decimal"
+                       min="4" max="1400" step="0.1" placeholder="e.g. 150"
+                       aria-describedby="weight-lb-error weight-hint" autocomplete="off">
+                <span class="unit-suffix" aria-hidden="true">lb</span>
+              </div>
+              <p class="error" id="weight-lb-error" role="alert" hidden></p>
+            </div>
+            <p class="hint" id="weight-hint">Add your weight to also see your BMI and weight category.</p>
+          </fieldset>
+
+          <!-- Age -->
+          <fieldset class="field-group">
+            <legend>Your age <span class="req" aria-hidden="true">*</span></legend>
+            <div class="field">
+              <label for="age">Age in years</label>
+              <div class="input-wrap">
+                <input type="number" id="age" name="age" inputmode="numeric"
+                       min="1" max="120" step="1" placeholder="e.g. 32"
+                       aria-describedby="age-error" autocomplete="off">
+                <span class="unit-suffix" aria-hidden="true">yrs</span>
+              </div>
+              <p class="error" id="age-error" role="alert" hidden></p>
+            </div>
+          </fieldset>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">Calculate</button>
+            <button type="reset" class="btn btn-secondary" id="reset-btn">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Results -->
+      <section class="card results" id="results" aria-labelledby="results-heading" aria-live="polite" hidden>
+        <h2 id="results-heading">Your results</h2>
+
+        <div class="result-grid">
+          <div class="result-block range-block">
+            <h3>Healthy weight range</h3>
+            <p class="big-number"><span id="range-low">–</span> – <span id="range-high">–</span> <span class="big-unit" id="range-unit">kg</span></p>
+            <p class="alt-unit" id="range-alt">–</p>
+            <p class="explain" id="range-explain"></p>
+          </div>
+
+          <div class="result-block bmi-block" id="bmi-block" hidden>
+            <h3>Your BMI</h3>
+            <p class="big-number"><span id="bmi-value">–</span></p>
+            <p class="category-chip" id="bmi-category" hidden></p>
+            <p class="explain" id="bmi-explain"></p>
+          </div>
+        </div>
+
+        <p class="verdict" id="verdict" hidden></p>
+        <p class="notice notice-minor" id="minor-notice" hidden></p>
+
+        <!-- Visual range indicator -->
+        <div class="scale-wrap">
+          <h3 id="scale-heading">Where you sit on the BMI scale</h3>
+          <div class="scale" role="img" aria-labelledby="scale-heading" id="scale-desc">
+            <div class="scale-track">
+              <div class="scale-seg seg-under" style="width: 23.2%"><span>Under<wbr>weight</span></div>
+              <div class="scale-seg seg-healthy" style="width: 23.2%"><span>Healthy</span></div>
+              <div class="scale-seg seg-over" style="width: 17.9%"><span>Over<wbr>weight</span></div>
+              <div class="scale-seg seg-obese" style="width: 35.7%"><span>Obesity</span></div>
+              <div class="scale-marker" id="scale-marker" hidden>
+                <span class="marker-pin" aria-hidden="true"></span>
+                <span class="marker-label" id="marker-label"></span>
+              </div>
+            </div>
+            <div class="scale-axis" aria-hidden="true">
+              <span>12</span><span>18.5</span><span>25</span><span>30</span><span>40</span>
+            </div>
+          </div>
+          <p class="scale-note" id="scale-note"></p>
+        </div>
+
+        <p class="disclaimer">Estimates only — not medical advice. Ideal-weight formulas can't account for muscle mass,
+          body composition, pregnancy or health conditions. If you have concerns, talk to a qualified health professional.</p>
+
+        <div class="actions">
+          <button type="button" class="btn btn-secondary" id="recalc-btn">Adjust my inputs</button>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section class="card" id="how-it-works" aria-labelledby="how-heading">
+        <h2 id="how-heading">How this calculator works</h2>
+        <ol class="steps">
+          <li><strong>We convert your height to metres.</strong> Centimetres are divided by 100; feet and inches are converted at 1&nbsp;in = 2.54&nbsp;cm.</li>
+          <li><strong>We apply the healthy adult BMI band.</strong> Health organisations link the lowest risk to a BMI between 18.5 and 24.9, so your range is 18.5&nbsp;×&nbsp;height² up to 24.9&nbsp;×&nbsp;height².</li>
+          <li><strong>If you add your weight, we compute your BMI</strong> and place it in a category — but only for ages 18 and over, because adult cut-offs don't fit younger bodies.</li>
+        </ol>
+
+        <h3>The BMI formula</h3>
+        <p class="formula">BMI = weight&nbsp;(kg) ÷ height&nbsp;(m)²</p>
+        <p>In imperial units: BMI = 703 × weight&nbsp;(lb) ÷ height&nbsp;(in)² — the 703 simply converts the units so the result matches the metric formula.</p>
+
+        <h3>Worked example</h3>
+        <p>A person is 170&nbsp;cm tall (1.70&nbsp;m) and weighs 70&nbsp;kg:</p>
+        <ul class="example">
+          <li>Healthy range: 18.5 × 1.70² = <strong>53.5&nbsp;kg</strong> to 24.9 × 1.70² = <strong>72.0&nbsp;kg</strong>.</li>
+          <li>BMI: 70 ÷ 1.70² = 70 ÷ 2.89 = <strong>24.2</strong> — inside the healthy band.</li>
+          <li>Difference: 70&nbsp;kg sits <strong>within</strong> the 53.5–72.0&nbsp;kg range, so no gap to report.</li>
+        </ul>
+        <p>These formulas give estimates, not a universal medical target — two people at the same height can have different healthy weights depending on build, muscle and health history.</p>
+      </section>
+
+      <!-- FAQs -->
+      <section class="card" id="faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Frequently asked questions</h2>
+        <details>
+          <summary>What is a healthy weight range?</summary>
+          <p>It's the span of body weights linked to the lowest health risk for your height. This calculator estimates it from the adult BMI band of 18.5–24.9: the lower bound is 18.5 × height² and the upper bound is 24.9 × height² (height in metres, result in kilograms).</p>
+        </details>
+        <details>
+          <summary>How should I measure my height?</summary>
+          <p>Stand straight against a wall without shoes, heels together, and mark the top of your head. Measure in centimetres, or in feet and inches. Measure in the morning if possible — height can vary slightly through the day.</p>
+        </details>
+        <details>
+          <summary>Should I use kilograms or pounds?</summary>
+          <p>Either. Use the unit toggle above the form to switch between metric (kg, cm) and imperial (lb, ft/in). The calculator converts internally and always shows results in both units.</p>
+        </details>
+        <details>
+          <summary>Why does the calculator ask for my age?</summary>
+          <p>Adult BMI categories don't apply to children and teenagers, whose healthy ranges depend on age- and sex-specific growth charts. If you're under 18, we show an age-appropriate notice and skip the adult categories.</p>
+        </details>
+        <details>
+          <summary>Are ideal weight formulas accurate?</summary>
+          <p>They're estimates, not medical targets. BMI-based ranges don't account for muscle mass, bone density, body composition, pregnancy or medical conditions. Use the result as a starting point and discuss personal targets with a qualified health professional.</p>
+        </details>
+        <details>
+          <summary>What if my weight is outside the healthy range?</summary>
+          <p>Treat it as information, not a verdict. Small, sustainable changes to activity, sleep and nutrition matter more than chasing a single number. If you have concerns, speak with a doctor or registered dietitian rather than acting on a calculator alone.</p>
+        </details>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>HealthyWeight — a free educational tool. Results are estimates, not medical advice.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
